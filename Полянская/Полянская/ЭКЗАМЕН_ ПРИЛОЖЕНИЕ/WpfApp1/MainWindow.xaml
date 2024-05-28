@@ -1,0 +1,37 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,0">
+            <ComboBox x:Name="com" HorizontalAlignment="Left" Height="30" Margin="462,75,0,0" VerticalAlignment="Top" Width="153"/>
+        </Border>
+        <DataGrid x:Name="Vrooms" Margin="60,188,74,55" IsReadOnly="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Клиент" IsReadOnly="True" Width="*" Binding="{Binding Auto_brand}"/>
+                <DataGridTextColumn Header="Телефон" IsReadOnly="True" Width="*" Binding="{Binding Model}"/>
+                <DataGridTextColumn Header="Почта" IsReadOnly="True" Width="*" Binding="{Binding Car_Number}"/>
+                <DataGridTextColumn Header="Дата заказа" IsReadOnly="True" Width="*" Binding="{Binding Probeg}"/>
+                <DataGridTextColumn Header="Статус заказа" IsReadOnly="True" Width="*" Binding="{Binding Wear}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <ComboBox HorizontalAlignment="Left" Margin="121,64,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Фильтровать" HorizontalAlignment="Left" Margin="255,63,0,0" VerticalAlignment="Top" Height="28" Width="97"/>
+        <Button Content="Показать все" HorizontalAlignment="Left" Margin="255,101,0,0" VerticalAlignment="Top" Height="28" Width="97"/>
+        <Label Content="Выберите поле для сортировки" HorizontalAlignment="Left" Margin="443,29,0,0" VerticalAlignment="Top" Width="191"/>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="26" Margin="745,60,0,0" VerticalAlignment="Top" Width="14"/>
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Height="26" Margin="745,88,0,0" VerticalAlignment="Top" Width="14"/>
+        <Label Content="Выберите клиента" HorizontalAlignment="Left" Margin="5,63,0,0" VerticalAlignment="Top"/>
+        <Label Content="Строка поиска" HorizontalAlignment="Left" Margin="6,103,0,0" VerticalAlignment="Top" Width="111"/>
+        <TextBox HorizontalAlignment="Left" Height="27" Margin="127,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114"/>
+        <Label Content="По возрастанию
+" HorizontalAlignment="Left" Margin="636,57,0,0" VerticalAlignment="Top" Width="104"/>
+        <Label Content="По убыванию " HorizontalAlignment="Left" Margin="648,85,0,0" VerticalAlignment="Top" Width="92"/>
+    </Grid>
+</Window>
