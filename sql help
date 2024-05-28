@@ -1,0 +1,169 @@
+https://chatgpt.com/share/3aaa8493-9001-441b-899f-b202b8ec8438
+---------------------------------
+Запросы (или queries) — это основа работы с базами данных и языком SQL (Structured Query Language). Они позволяют извлекать, добавлять, изменять и удалять данные из базы данных. Давай разберём основные типы запросов:
+
+SELECT - используется для извлечения данных из базы данных.
+
+sql
+Copy code
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+Пример: Получить все имена и возраст из таблицы пользователей старше 18 лет.
+
+sql
+Copy code
+SELECT name, age
+FROM users
+WHERE age > 18;
+INSERT - используется для добавления новых строк в таблицу.
+
+sql
+Copy code
+INSERT INTO table_name (column1, column2)
+VALUES (value1, value2);
+Пример: Добавить нового пользователя с именем "John" и возрастом 30.
+
+sql
+Copy code
+INSERT INTO users (name, age)
+VALUES ('John', 30);
+UPDATE - используется для изменения существующих данных в таблице.
+
+sql
+Copy code
+UPDATE table_name
+SET column1 = value1, column2 = value2
+WHERE condition;
+Пример: Обновить возраст пользователя с именем "John" на 31.
+
+sql
+Copy code
+UPDATE users
+SET age = 31
+WHERE name = 'John';
+DELETE - используется для удаления данных из таблицы.
+
+sql
+Copy code
+DELETE FROM table_name
+WHERE condition;
+Пример: Удалить пользователя с именем "John".
+
+sql
+Copy code
+DELETE FROM users
+WHERE name = 'John';
+Эти запросы можно комбинировать и усложнять, добавляя, например, сортировку (ORDER BY), группировку (GROUP BY) и соединения (JOIN) для работы с несколькими таблицами.
+
+Вот пример более сложного запроса, который использует JOIN для объединения данных из двух таблиц:
+
+sql
+Copy code
+SELECT users.name, orders.order_date
+FROM users
+JOIN orders ON users.id = orders.user_id
+WHERE users.age > 18
+ORDER BY orders.order_date DESC;
+Этот запрос извлекает имена пользователей и даты заказов для всех пользователей старше 18 лет и сортирует результаты по дате заказа в порядке убывания.
+
+Если у тебя есть конкретные вопросы или нужно объяснить что-то более детально, дай знать!
+
+
+2/2
+
+
+приведи пример более сложных запросов
+ChatGPT
+Конечно! Давай рассмотрим несколько примеров более сложных запросов, которые включают в себя подзапросы, агрегатные функции и объединения (JOIN).
+
+Пример 1: Подзапрос (Subquery)
+Подзапрос — это запрос внутри другого запроса. Используется, когда нужно получить данные из одного запроса для использования в другом.
+
+Задача: Найти всех пользователей, которые сделали больше двух заказов.
+
+sql
+Copy code
+SELECT name
+FROM users
+WHERE id IN (
+    SELECT user_id
+    FROM orders
+    GROUP BY user_id
+    HAVING COUNT(*) > 2
+);
+Пример 2: Объединение таблиц (JOIN)
+Объединение таблиц используется для извлечения данных из нескольких таблиц, связанных между собой.
+
+Задача: Получить список всех заказов с именами пользователей, сделавших заказы.
+
+sql
+Copy code
+SELECT users.name, orders.order_id, orders.order_date
+FROM users
+JOIN orders ON users.id = orders.user_id;
+Пример 3: Агрегатные функции (Aggregate Functions)
+Агрегатные функции позволяют выполнять вычисления на множестве значений для получения единого значения.
+
+Задача: Получить общую сумму всех заказов для каждого пользователя.
+
+sql
+Copy code
+SELECT users.name, SUM(orders.amount) AS total_spent
+FROM users
+JOIN orders ON users.id = orders.user_id
+GROUP BY users.name;
+Пример 4: Использование подзапросов с агрегатными функциями
+Задача: Найти пользователей, которые потратили больше среднего значения всех заказов.
+
+sql
+Copy code
+SELECT name, total_spent
+FROM (
+    SELECT users.name, SUM(orders.amount) AS total_spent
+    FROM users
+    JOIN orders ON users.id = orders.user_id
+    GROUP BY users.name
+) AS user_totals
+WHERE total_spent > (
+    SELECT AVG(total_spent)
+    FROM (
+        SELECT SUM(amount) AS total_spent
+        FROM orders
+        GROUP BY user_id
+    ) AS all_user_totals
+);
+Пример 5: Объединение (Union)
+Объединение позволяет комбинировать результаты нескольких SELECT-запросов.
+
+Задача: Получить список всех активных и неактивных пользователей, указав их статус.
+
+sql
+Copy code
+SELECT name, 'active' AS status
+FROM users
+WHERE active = 1
+UNION
+SELECT name, 'inactive' AS status
+FROM users
+WHERE active = 0;
+Пример 6: CASE оператор
+CASE оператор позволяет выполнять логические проверки и возвращать различные значения в зависимости от условий.
+
+Задача: Получить список пользователей с отметкой, является ли каждый из них "Новым" или "Постоянным" клиентом в зависимости от даты регистрации.
+
+sql
+Copy code
+SELECT name, 
+CASE 
+    WHEN registration_date > '2023-01-01' THEN 'New'
+    ELSE 'Regular'
+END AS customer_type
+FROM users;
+Эти примеры демонстрируют, как можно использовать различные возможности SQL для создания более сложных и мощных запросов. Если нужно больше примеров или объяснений, не стесняйся спрашивать!
+
+
+
+
+
+
